@@ -19,7 +19,11 @@ jobs:
       - name: Install dependencies
         run: |
           curl -sSL https://install.python-poetry.org | python3 -
+          poetry config virtualenvs.create true
+          poetry config virtualenvs.in-project true
           poetry install
 
       - name: Test
-        run: pytest .
+        run: |
+          source .venv/bin/activate
+          pytest .
